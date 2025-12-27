@@ -36,12 +36,11 @@ This project implements multi-modal classification models for detecting hateful 
 
 ## 🤗 Models on Hugging Face
 
-<!-- Add your model links here -->
 | Model | Link |
 |-------|------|
-| CLIP Fusion | [![Hugging Face](https://img.shields.io/badge/🤗%20Model-yellow.svg)](https://huggingface.co/YOUR_USERNAME/MODEL_NAME) |
-| CLIP MTL | [![Hugging Face](https://img.shields.io/badge/🤗%20Model-yellow.svg)](https://huggingface.co/YOUR_USERNAME/MODEL_NAME) |
-| SigLIP Fusion | [![Hugging Face](https://img.shields.io/badge/🤗%20Model-yellow.svg)](https://huggingface.co/YOUR_USERNAME/MODEL_NAME) |
+| CLIP Fusion | [![Hugging Face](https://img.shields.io/badge/🤗%20Model-clip--fusion-yellow.svg)](https://huggingface.co/Amirhossein75/clip-vit-base-mmhs150k-fusion) |
+| CLIP MTL | [![Hugging Face](https://img.shields.io/badge/🤗%20Model-clip--mtl-yellow.svg)](https://huggingface.co/Amirhossein75/clip-vit-base-mmhs150k-mtl) |
+| SigLIP Fusion | [![Hugging Face](https://img.shields.io/badge/🤗%20Model-siglip--fusion-yellow.svg)](https://huggingface.co/Amirhossein75/siglip2-base-mmhs150k-fusion) |
 
 ## 📁 Project Structure
 

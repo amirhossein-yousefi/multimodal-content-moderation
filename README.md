@@ -96,14 +96,116 @@ content_multi_modal/
     └── siglip_fusion_mmhshateful/
 ```
 
+## � Dataset
+
+This project uses the **MMHS150K** (Multi-Modal Hate Speech) dataset for training and evaluation.
+
+### About MMHS150K
+
+MMHS150K is a large-scale multi-modal hate speech dataset collected from Twitter, containing 150,000 tweet-image pairs annotated for hate speech detection.
+
+**Paper:** ["Exploring Hate Speech Detection in Multimodal Publications"](https://gombru.github.io/2019/10/09/MMHS/) (WACV 2020)  
+**Authors:** Raul Gomez, Jaume Gibert, Lluis Gomez, Dimosthenis Karatzas
+
+### Dataset Statistics
+
+| Split | Samples |
+|-------|---------|
+| Train | ~112,500 |
+| Validation | ~15,000 |
+| Test | ~22,500 |
+
+### Label Categories
+
+| Label ID | Category | Description |
+|----------|----------|-------------|
+| 0 | NotHate | Non-hateful content |
+| 1 | Racist | Racist content |
+| 2 | Sexist | Sexist content |
+| 3 | Homophobe | Homophobic content |
+| 4 | Religion | Religion-based hate |
+| 5 | OtherHate | Other types of hate speech |
+
+### Obtaining the Dataset
+
+1. **Download MMHS150K** from the official source:
+   - Visit: https://gombru.github.io/2019/10/09/MMHS/
+   - Request access and download the dataset
+
+2. **Extract the raw data** to `data/_raw_mmhs/MMHS150K/`:
+   ```
+   data/_raw_mmhs/MMHS150K/
+   ├── MMHS150K_GT.json          # Ground truth annotations
+   ├── MMHS150K_readme.txt       # Dataset documentation
+   ├── hatespeech_keywords.txt   # Keywords used for data collection
+   ├── img_resized/              # Images (500px shortest side)
+   ├── img_txt/                  # OCR-extracted text from images
+   └── splits/
+       ├── train_ids.txt
+       ├── val_ids.txt
+       └── test_ids.txt
+   ```
+
+### Data Preparation
+
+Run the data preparation script to convert raw MMHS150K data into the training format:
+
+```bash
+python scripts/prepare_data.py \
+    --dataset mmhs150k \
+    --raw_dir data/_raw_mmhs/MMHS150K \
+    --output data/mmhs150k
+```
+
+This will create the processed dataset:
+
+```
+data/mmhs150k/
+├── train.csv           # Training split
+├── val.csv             # Validation split  
+├── test.csv            # Test split
+├── class_names.txt     # Label names
+└── images/             # Processed images (copy from raw)
+```
+
+**Note:** After running the script, copy images from `data/_raw_mmhs/MMHS150K/img_resized/` to `data/mmhs150k/images/`:
+
+```bash
+# Linux/Mac
+cp -r data/_raw_mmhs/MMHS150K/img_resized/* data/mmhs150k/images/
+
+# Windows
+xcopy data\_raw_mmhs\MMHS150K\img_resized\* data\mmhs150k\images\ /E /I
+```
+
+### CSV Format
+
+The prepared CSV files have the following format:
+
+| Column | Description |
+|--------|-------------|
+| `text` | Tweet text content |
+| `image_path` | Image filename (e.g., `12345.jpg`) |
+| `labels` | Comma-separated hate categories (e.g., `racist,sexist`) |
+
+### Alternative Dataset: Hateful Memes
+
+You can also use the Facebook Hateful Memes dataset:
+
+```bash
+python scripts/prepare_data.py --dataset hateful_memes --output data/
+```
+
+This downloads and prepares the dataset automatically from Hugging Face.
+
 ## 🚀 Quick Start
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/content_multi_modal.git
-cd content_multi_modal
+git clone https://github.com/amirhossein-yousefi/multimodal-content-moderation.git
+cd multimodal-content-moderation
 
 # Create virtual environment
 python -m venv venv

@@ -1,0 +1,10 @@
+{
+  "test_loss": 1.0397828817367554,
+  "test_f1_macro": 0.5147331764087658,
+  "test_f1_micro": 0.5171337426679931,
+  "test_roc_macro": 0.8039564443168044,
+  "test_runtime": 24.9425,
+  "test_samples_per_second": 400.922,
+  "test_steps_per_second": 12.549,
+  "epoch": 5.0
+}

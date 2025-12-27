@@ -1,0 +1,43 @@
+# Core ML/DL
+torch>=2.0.0
+torchvision>=0.15.0
+transformers>=4.35.0
+accelerate>=0.24.0
+
+# Data processing
+numpy>=1.24.0
+pandas>=2.0.0
+Pillow>=9.0.0
+
+# ML utilities
+scikit-learn>=1.3.0
+
+# Hugging Face tools
+huggingface-hub>=0.19.0
+safetensors>=0.4.0
+
+# Configuration
+pyyaml>=6.0
+python-dotenv>=1.0.0
+
+# Logging and monitoring
+tensorboard>=2.14.0
+tqdm>=4.65.0
+
+# Data download utilities
+gdown>=4.7.0
+
+# AWS SageMaker (optional - for cloud deployment)
+sagemaker>=2.200.0
+boto3>=1.28.0
+
+# Development
+pytest>=7.0.0
+black>=23.0.0
+isort>=5.12.0
+flake8>=6.0.0
+
+# Optional: for notebooks
+jupyter>=1.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0

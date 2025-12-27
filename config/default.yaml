@@ -1,0 +1,130 @@
+# Default configuration for multi-modal content classification
+
+# =============================================================================
+# Model Configuration
+# =============================================================================
+model:
+  backend: clip                           # Options: clip, siglip, auto
+  head: fusion                            # Options: fusion, mtl
+  encoder_name: openai/clip-vit-base-patch32
+  fusion_dim: 512
+  max_text_length: 77
+  freeze_text: false
+  freeze_image: false
+  
+  # Multi-task specific (only used when head=mtl)
+  head_hidden_dim: 0                      # >0 adds hidden layer per task head
+  learnable_task_weights: false
+
+# =============================================================================
+# Data Configuration
+# =============================================================================
+data:
+  train_csv: data/mmhs150k/train.csv
+  val_csv: data/mmhs150k/val.csv
+  test_csv: data/mmhs150k/test.csv
+  image_root: data/mmhs150k/images
+  class_names:                            # Leave empty for binary classification
+    - racist
+    - sexist
+    - homophobe
+    - religion
+    - otherhate
+
+# =============================================================================
+# Training Configuration
+# =============================================================================
+training:
+  # Batch sizes
+  per_device_train_batch_size: 32
+  per_device_eval_batch_size: 64
+  gradient_accumulation_steps: 2
+  
+  # Epochs and steps
+  num_train_epochs: 8
+  max_steps: -1                           # -1 means use num_train_epochs
+  
+  # Learning rates
+  lr_encoder: 1.0e-5                      # Learning rate for encoder (backbone)
+  lr_head: 5.0e-4                         # Learning rate for classification head
+  
+  # Regularization
+  weight_decay: 0.02
+  max_grad_norm: 1.0
+  
+  # Scheduler
+  warmup_ratio: 0.05
+  lr_scheduler_type: cosine
+  
+  # Precision
+  precision: fp16                         # Options: fp32, fp16, bf16
+  gradient_checkpointing: false
+  
+  # Data loading
+  num_workers: 4
+  sampler: random                         # Options: random, weighted
+
+# =============================================================================
+# Loss Configuration
+# =============================================================================
+loss:
+  type: bce                               # Options: bce, focal
+  focal_gamma: 1.5
+  use_logit_adjustment: false
+
+# =============================================================================
+# Data Augmentation
+# =============================================================================
+augmentation:
+  enabled: true
+  aug_scale_min: 0.8
+  aug_scale_max: 1.0
+  horizontal_flip: true
+  color_jitter: true
+
+# =============================================================================
+# Evaluation Configuration
+# =============================================================================
+evaluation:
+  eval_strategy: epoch                    # Options: epoch, steps
+  eval_steps: 500                         # Only used when eval_strategy=steps
+  threshold: 0.5                          # Default threshold for predictions
+  
+  # Threshold calibration grid
+  calibration:
+    enabled: true
+    grid_start: 0.05
+    grid_end: 0.95
+    grid_steps: 19
+
+# =============================================================================
+# Saving Configuration
+# =============================================================================
+saving:
+  output_dir: runs
+  save_total_limit: 2
+  save_strategy: epoch
+  load_best_model_at_end: true
+  metric_for_best_model: roc_macro
+  greater_is_better: true
+
+# =============================================================================
+# Logging Configuration
+# =============================================================================
+logging:
+  logging_steps: 50
+  report_to: tensorboard                  # Options: none, tensorboard, wandb
+  run_name: null                          # Auto-generated if null
+
+# =============================================================================
+# Early Stopping
+# =============================================================================
+early_stopping:
+  enabled: true
+  patience: 3
+
+# =============================================================================
+# Misc
+# =============================================================================
+seed: 42
+dump_test_predictions: false

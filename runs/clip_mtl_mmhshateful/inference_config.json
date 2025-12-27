@@ -1,0 +1,21 @@
+{
+  "encoder_name": "openai/clip-vit-base-patch32",
+  "backend": "clip",
+  "fusion_dim": 512,
+  "threshold": 0.5,
+  "thresholds": [
+    0.3,
+    0.7,
+    0.49999999999999994,
+    0.3,
+    0.5499999999999999
+  ],
+  "class_names": [
+    "racist",
+    "sexist",
+    "homophobe",
+    "religion",
+    "otherhate"
+  ],
+  "best_checkpoint_dir": "runs/clip_mtl_mmhshateful\\checkpoint-11236"
+}

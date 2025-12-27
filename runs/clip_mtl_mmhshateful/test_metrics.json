@@ -1,0 +1,20 @@
+{
+  "test_loss": 1.3768482208251953,
+  "test_f1_macro": 0.5689961674639867,
+  "test_f1_micro": 0.6441662130284885,
+  "test_roc_macro": 0.7831879348628236,
+  "test_f1_racist": 0.6722280887011616,
+  "test_roc_racist": 0.7646010592804575,
+  "test_f1_sexist": 0.58887171561051,
+  "test_roc_sexist": 0.8096820952008768,
+  "test_f1_homophobe": 0.7447346251053075,
+  "test_roc_homophobe": 0.8817254649981562,
+  "test_f1_religion": 0.2229965156794425,
+  "test_roc_religion": 0.617501739016949,
+  "test_f1_otherhate": 0.6161498922235119,
+  "test_roc_otherhate": 0.8424293158176784,
+  "test_runtime": 25.5824,
+  "test_samples_per_second": 390.893,
+  "test_steps_per_second": 12.235,
+  "epoch": 4.0
+}

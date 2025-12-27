@@ -1,0 +1,23 @@
+# SigLIP Fusion configuration for MMHS150K dataset
+
+# Inherit from default
+_base_: default.yaml
+
+# Model
+model:
+  backend: siglip
+  head: fusion
+  encoder_name: google/siglip2-base-patch16-224
+  fusion_dim: 512
+
+# Training - SigLIP may need different hyperparameters
+training:
+  per_device_train_batch_size: 24
+  gradient_accumulation_steps: 2
+  num_train_epochs: 8
+  lr_encoder: 5.0e-6
+  lr_head: 3.0e-4
+
+# Output
+saving:
+  output_dir: runs/siglip_fusion_mmhshateful
